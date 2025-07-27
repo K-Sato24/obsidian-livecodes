@@ -1,0 +1,182 @@
+@charset "UTF-8";
+:where(:root) {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: var(--base-letter-spacing, normal);
+  letter-spacing: var(--base-letter-spacing, initial);
+  color: var(--color-dark, #000);
+  color: var(--color-dark, initial);
+  background-color: var(--color-light, transparent);
+  background-color: var(--color-light, initial);
+  color-scheme: var(--base-font-color-scheme, only light);
+}
+
+:root {
+  /* 単位変換 */
+  --base-font-size: 16; /* ルートフォントサイズ(px) */
+  --px-to-rem: calc(1rem / var(--base-font-size, 16));
+  /* Font Family */
+  --font-sans: "Noto Sans JP", sans-serif;
+  /* Color */
+  --color-light: #fff;
+  --color-dark: #333;
+  --color-dark-pale: #707070;
+  --color-main-light: #99c274;
+  --color-main: #569b6f;
+  --color-main-dark: #008bf2;
+  --color-accent-light: #f7c6a5;
+  --color-accent: #f4a130;
+  --color-accent-dark: #d2a400;
+  --color-accent-bg-light: #fefdf3;
+  --color-main-bg: #eff7ea;
+  --color-accent-bg-dark: #f7f1e5;
+  --color-strong: #ff0000;
+  /* Easing */
+  /* Sine */
+  --ease-in-sine: cubic-bezier(0.12, 0, 0.39, 0);
+  --ease-out-sine: cubic-bezier(0.61, 1, 0.88, 1);
+  --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
+  /* Cubic */
+  --ease-in-cubic: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  /* Quint */
+  --ease-in-quint: cubic-bezier(0.64, 0, 0.78, 0);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  /* Circ */
+  --ease-in-circ: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-out-circ: cubic-bezier(0, 0.55, 0.45, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+  /* Quad */
+  --ease-in-quad: cubic-bezier(0.11, 0, 0.5, 0);
+  --ease-out-quad: cubic-bezier(0.5, 1, 0.89, 1);
+  --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
+  /* Quart */
+  --ease-in-quart: cubic-bezier(0.5, 0, 0.75, 0);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  /* Expo */
+  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  /* Back */
+  --ease-in-back: cubic-bezier(0.36, 0, 0.66, -0.56);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-back: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+body {
+  /* Clamp Base Size */
+  --clamp-viewport-min: 375;
+  --clamp-viewport-max: 1200;
+  --clamp-min: 14;
+  --clamp-max: 16;
+}
+
+*,
+::before,
+::after {
+  /* Clamp Calculation */
+  --clamp-root-font-size: 16;
+  --clamp: clamp(
+    calc(var(--clamp-min) / var(--clamp-root-font-size, 16) * 1rem),
+    calc(
+      (var(--clamp-min) / var(--clamp-root-font-size, 16) * 1rem) +
+        (
+          (var(--clamp-max) - var(--clamp-min)) /
+            (var(--clamp-viewport-max) - var(--clamp-viewport-min))
+        ) * (100vw - var(--clamp-viewport-min) * 1px)
+    ),
+    calc(var(--clamp-max) / var(--clamp-root-font-size, 16) * 1rem)
+  );
+}
+
+html,
+body {
+  /* footerを常に画面最下部に表示を実現するために必要 */
+  height: 100%;
+}
+
+body > footer {
+  /* コンテンツが少ない場合も常にfooterを画面最下部に表示 */
+  position: sticky;
+  top: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.desktop-only {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .desktop-only {
+    display: revert;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+.is-fixed {
+  overflow: hidden;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* Container幅をはみ出して全画面表示 */
+.overflow-container {
+  width: 100vw;
+  margin-inline: calc(50% - 50dvw);
+}
+
+.overflow-container-left {
+  margin-inline: calc(50% - 50vw) 0;
+}
+
+.overflow-container-right {
+  margin-inline: 0 calc(50% - 50vw);
+}
+
+/* 視覚的に非表示にするユーティリティクラス（スクリーンリーダー対応） */
+:where(.visually-hidden:not(:focus-within, :active)) {
+  position: absolute !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  user-select: none !important;
+  border: 0 !important;
+}
+
+:where(:focus-visible) {
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  padding-inline: 20px;
+  margin-inline: auto;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1150px;
+    padding-inline: 25px;
+  }
+}
