@@ -96,13 +96,17 @@ body {
 html,
 body {
   /* footerを常に画面最下部に表示を実現するために必要 */
-  height: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
 }
 
 body > footer {
   /* コンテンツが少ない場合も常にfooterを画面最下部に表示 */
   position: sticky;
   top: 100vh;
+  top: 100svh;
+  top: 100dvh;
 }
 
 a {
