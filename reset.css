@@ -19,7 +19,7 @@
 	Root Element Defaults
 ===================================== */
 :where(:root) {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   font-style: normal;
   line-break: strict;
   overflow-wrap: anywhere;
